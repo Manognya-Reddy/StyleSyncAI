@@ -1,0 +1,782 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --cream: #FAF9F6;
+  --ink: #1A1916;
+  --muted: #6B6860;
+  --border: #E8E5DF;
+  --blush: #F5EDE8;
+  --gold: #C4A96A;
+  --card-bg: #FFFFFF;
+  --radius: 16px;
+  --shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.app-container {
+  max-width: 700px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--cream);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  letter-spacing: 3px;
+}
+
+.nav-logo span {
+  color: var(--gold);
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.nav-tab {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.nav-tab:hover {
+  background: var(--border);
+}
+
+.nav-tab.active {
+  background: var(--ink);
+  color: white;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.card-stack {
+  position: relative;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.clothing-card {
+  position: absolute;
+  width: 100%;
+  max-width: 340px;
+  background: white;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  box-shadow: var(--shadow);
+}
+
+.clothing-card.dragging {
+  cursor: grabbing;
+}
+
+.card-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-info {
+  padding: 16px;
+}
+
+.card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.card-price {
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.tag {
+  padding: 3px 10px;
+  background: var(--cream);
+  border-radius: 20px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.swipe-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.action-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: white;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+}
+
+.action-btn:hover {
+  transform: scale(1.1);
+}
+
+.reset-btn {
+  width: auto;
+  padding: 10px 24px;
+}
+
+.toast-message {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: white;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 12px;
+  z-index: 1000;
+  white-space: nowrap;
+}
+
+.empty-stack {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.empty-stack h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.swipe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.swipe-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.swipe-header p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.swipe-count {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 100px);
+}
+
+.chat-header {
+  margin-bottom: 12px;
+}
+
+.chat-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.chat-header p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.message {
+  display: flex;
+  gap: 10px;
+  max-width: 85%;
+}
+
+.message.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.message-bubble {
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.message.ai .message-bubble {
+  background: white;
+  border: 1px solid var(--border);
+}
+
+.message.user .message-bubble {
+  background: var(--ink);
+  color: white;
+}
+
+.message-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.message-avatar.ai {
+  background: var(--blush);
+}
+
+.message-avatar.user {
+  background: var(--gold);
+}
+
+.products-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-top: 8px;
+  padding-bottom: 4px;
+}
+
+.product-card {
+  flex-shrink: 0;
+  width: 100px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.product-card img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  display: block;
+}
+
+.product-card-info {
+  padding: 6px 8px;
+}
+
+.product-card-name {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.product-card-price {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.loading-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 14px;
+}
+
+.loading-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--muted);
+  animation: bounce 1.2s infinite;
+}
+
+.suggestions-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.suggestion-btn {
+  padding: 5px 12px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 11px;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  white-space: nowrap;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  background: white;
+  outline: none;
+}
+
+.chat-input:focus {
+  border-color: var(--gold);
+}
+
+.send-btn {
+  width: 44px;
+  height: 44px;
+  background: var(--ink);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+@keyframes bounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+
+.dashboard-container {
+  padding-bottom: 20px;
+}
+
+.dashboard-header {
+  margin-bottom: 16px;
+}
+
+.dashboard-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.dashboard-header p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stat-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 8px;
+  text-align: center;
+}
+
+.stat-icon {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.stat-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.stat-label {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.section-card {
+  background: white;
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+
+.section-title {
+  font-weight: 500;
+  font-size: 13px;
+  margin-bottom: 10px;
+  letter-spacing: -0.2px;
+}
+
+.pref-tag {
+  display: inline-block;
+  background: var(--cream);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  margin: 3px;
+  color: var(--ink);
+}
+
+.empty-text {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.category-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.category-name {
+  font-size: 12px;
+  min-width: 70px;
+  color: var(--ink);
+}
+
+.category-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--cream);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.category-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+.category-count {
+  font-size: 11px;
+  color: var(--muted);
+  min-width: 16px;
+  text-align: right;
+}
+
+.recent-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.recent-item img {
+  width: 100%;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.recent-item p {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+.saved-header {
+  margin-bottom: 16px;
+}
+
+.saved-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.saved-header p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.empty-saved {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+}
+
+.empty-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.saved-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.saved-item {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.saved-item img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+}
+
+.saved-item-info {
+  padding: 8px;
+}
+
+.saved-item-name {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.saved-item-price {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.remove-btn {
+  margin-top: 6px;
+  font-size: 10px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--cream);
+}
+
+.login-card {
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 32px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.login-hero {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.login-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 44px;
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+.login-hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.login-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.mode-switch {
+  display: flex;
+  background: var(--cream);
+  border-radius: 30px;
+  padding: 3px;
+  margin-bottom: 20px;
+  gap: 3px;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 8px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: 'DM Sans', sans-serif;
+  background: transparent;
+  color: var(--muted);
+  transition: all 0.2s;
+}
+
+.mode-btn.active {
+  background: white;
+  color: var(--ink);
+  font-weight: 500;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.form-field {
+  margin-bottom: 16px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.form-field input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  outline: none;
+}
+
+.form-field input:focus {
+  border-color: var(--gold);
+  background: white;
+}
+
+.error-text {
+  color: #F44336;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--ink);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.primary-btn:hover {
+  opacity: 0.85;
+}
+
+.demo-text {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 12px;
+}
+
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nav-tabs .nav-tab {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+  
+  .saved-grid {
+    grid-template-columns: 1fr;
+  }
+}
