@@ -2,6 +2,9 @@
 A full-stack Pinterest-style fashion discovery app with an AI stylist chatbot.
 
 
+Live Link: https://style-sync-ai-nine.vercel.app/
+
+
 ```
 ai-fashion-stylist/
 ├── backend/
